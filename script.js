@@ -14,8 +14,9 @@ var arr =[
 
 ]
 
+let filarr;
 
-function showCards(){
+const showCards = () =>{
     var card = "";
    
     arr.forEach((item)=>{
@@ -34,20 +35,53 @@ function showCards(){
 
 
 const search = () =>{
-   document.querySelector("#searchinput").addEventListener("focus",()=>{
+
+     var search = document.querySelector("#searchinput");
+ search.addEventListener("focus",()=>{
         document.querySelector(".overlay").style.display = "block";
    })
 
-   document.querySelector("#searchinput").addEventListener("blur",()=>{
+  search.addEventListener("blur",()=>{
     document.querySelector(".overlay").style.display = "none";
 })
 
-document.querySelector("#searchinput").addEventListener("input", () =>{
-    
+  search.addEventListener("input", () =>{
+     filarr = arr.filter(obj=> obj.name.toLowerCase().startsWith(search.value));
+    var curr = "";
+    filarr.forEach((obj)=>{
+        curr+= `<div class="res flex px-8 py-3">
+        <i class="ri-search-line font-semibold mr-5"></i>
+        <h3 class="font-semibold">${obj.name}</h3>
+        </div>`
+    })
+    document.querySelector(".searchdata").style.display="block";
+    document.querySelector(".searchdata").innerHTML = curr;
+
 })
    
 }
 
+
+ 
+     function searchedCards(){
+     document.querySelector(".searchdata").style.display="none";
+   var card = "";
+   
+     filarr.forEach((item)=>{
+        card+= `
+         <div class="box">
+             <img src="${item.image}" alt="${item.name}">
+           
+         </div>
+      `
+      document.querySelector(".container")
+      .innerHTML= card;
+   })
+
+ }
+
 showCards();
 
 search();
+
+document.querySelector(".searchdata").addEventListener("click", searchedCards);
