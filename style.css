@@ -60,3 +60,16 @@ img:hover {
     columns: 1;
   }
 }
+
+
+.container{
+ 
+  padding: 2vw;
+
+}
+
+.card{
+
+  padding: 1% ;
+  border-radius: 50px;
+}
